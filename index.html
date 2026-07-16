@@ -150,6 +150,7 @@
 
 <body class="bg-gradient-to-tr from-sky-50 via-slate-50 to-blue-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 text-slate-800 dark:text-slate-100 min-h-screen font-sans antialiased transition-colors duration-300">
 
+    <!-- Onboarding Panel Screen Overlay -->
     <div id="onboarding-screen" class="fixed inset-0 z-50 overflow-y-auto bg-gradient-to-b from-sky-50 via-white to-sky-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 transition-all duration-700">
         <div class="min-h-full flex flex-col items-center justify-between p-6 max-w-md mx-auto w-full">
             
@@ -207,7 +208,7 @@
                 <p class="text-sm text-slate-500 dark:text-slate-400 mt-1" id="popup-body">Keep active, feel energized. Sip a fresh glass of water now!</p>
                 <div class="mt-3 flex gap-2">
                     <button onclick="logAGlassFromAlert()" class="px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white rounded-xl text-xs font-semibold shadow-md transition transform active:scale-95">I Drank!</button>
-                    <button onclick="dismissPopup()" class="px-3 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-750 text-slate-600 dark:text-slate-300 rounded-xl text-xs font-semibold transition">Snooze</button>
+                    <button onclick="dismissPopup()" class="px-3 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-755 text-slate-600 dark:text-slate-300 rounded-xl text-xs font-semibold transition">Snooze</button>
                 </div>
             </div>
         </div>
@@ -236,10 +237,16 @@
                     
                     <!-- Header Bar with Live Timed Greeting and Customized Username -->
                     <div class="flex justify-between items-center mb-6">
-                        <div>
-                            <span id="greeting-prefix" class="text-xs font-semibold text-sky-500 uppercase tracking-widest block">Good Morning,</span>
-                            <h2 class="text-2xl font-bold text-slate-900 dark:text-white" id="greeting-username">Pritam! 👋</h2>
-                            <p class="text-[11px] text-slate-400">Stay hydrated, stay healthy.</p>
+                        <div class="flex items-center gap-3">
+                            <!-- Circular Clickable Avatar Button -->
+                            <button onclick="openAvatarModal()" id="home-avatar-btn" class="w-12 h-12 shrink-0 rounded-full border-2 border-sky-400/80 hover:border-sky-500 shadow-md transition-all active:scale-95 flex items-center justify-center text-2.5xl overflow-hidden focus:outline-none" title="Select Profile Avatar">
+                                <span id="home-avatar-slot">💧</span>
+                            </button>
+                            <div>
+                                <span id="greeting-prefix" class="text-xs font-semibold text-sky-500 uppercase tracking-widest block">Good Morning,</span>
+                                <h2 class="text-2xl font-bold text-slate-900 dark:text-white" id="greeting-username">Pritam! 👋</h2>
+                                <p class="text-[11px] text-slate-400">Stay hydrated, stay healthy.</p>
+                            </div>
                         </div>
                         <button onclick="toggleQuickAlarm()" id="header-bell" class="w-10 h-10 rounded-full flex items-center justify-center bg-slate-50 dark:bg-slate-900 hover:bg-sky-50 dark:hover:bg-slate-800 transition-colors border border-slate-100 dark:border-slate-800 relative">
                             <span class="text-xl" id="bell-emoji">🔔</span>
@@ -290,7 +297,9 @@
 
                     <!-- Log drink quick-action button -->
                     <button onclick="logWaterDrink()" class="w-full py-4 mb-5 bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-2xl shadow-lg shadow-sky-500/20 flex items-center justify-center gap-2 transform active:scale-95 transition-all text-sm accent-pulse">
-                        <svg class="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <svg class="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
                         I've Drunk Water
                     </button>
 
@@ -392,7 +401,7 @@
                         <button onclick="switchStatsTab('month')" id="stats-tab-month" class="py-2 text-slate-400 hover:text-slate-600 rounded-xl text-xs font-semibold">Month</button>
                     </div>
 
-                    <!-- SVG Circular Completed Track Chart matching visual layout in reference image -->
+                    <!-- SVG Circular Completed Track Chart -->
                     <div class="glass-panel rounded-3xl p-4 flex flex-col items-center mb-5">
                         <div class="relative w-28 h-28 flex items-center justify-center mb-1">
                             <svg class="w-full h-full transform -rotate-90">
@@ -508,6 +517,17 @@
                             </label>
                         </div>
 
+                        <!-- Custom Premium Synthesized Notification Sound selector setting section -->
+                        <div class="bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800/80 p-3.5 rounded-2xl flex flex-col gap-3">
+                            <div class="flex items-center gap-3">
+                                <span class="text-lg">🎵</span>
+                                <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">Notification Sound</span>
+                            </div>
+                            <div class="space-y-1.5" id="settings-sound-list">
+                                <!-- Sound options injected dynamically by JS -->
+                            </div>
+                        </div>
+
                         <!-- Dark Theme Switch Toggle -->
                         <div class="flex justify-between items-center bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800/80 p-3.5 rounded-2xl">
                             <div class="flex items-center gap-3">
@@ -562,42 +582,40 @@
         <!-- Desktop Educational Panel & Modal Blocks -->
         <div class="flex-1 max-w-lg w-full flex flex-col gap-6">
             
-            <!-- Dynamic Reminder Interval Config Overlay Card -->
+            <!-- Dynamic Reminder Interval Config Card containing Interactive Timer Display Widget -->
             <div id="interval-panel-card" class="glass-panel rounded-3xl p-6 relative">
-                <div class="flex justify-between items-center mb-5">
+                <div class="flex justify-between items-center mb-5 gap-4">
                     <div>
                         <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">Reminder Interval</h3>
                         <p class="text-xs text-slate-400">Set recurring push notifications and timers.</p>
                     </div>
-                    <span class="text-2xl animate-pulse">⏰</span>
+                    
+                    <!-- PREMIUM COUNTDOWN TIMER DISPLAY WIDGET -->
+                    <div class="relative w-24 h-24 flex items-center justify-center shrink-0">
+                        <!-- Pulsing outer glow -->
+                        <div class="absolute inset-0 bg-sky-400/20 dark:bg-sky-500/10 rounded-full animate-ping scale-90 opacity-60"></div>
+                        <!-- Progress Circle SVG -->
+                        <svg class="absolute w-full h-full transform -rotate-90">
+                            <circle cx="48" cy="48" r="40" stroke="rgba(224, 242, 254, 0.4)" stroke-width="6" fill="transparent"/>
+                            <circle id="countdown-progress" cx="48" cy="48" r="40" stroke="#0ea5e9" stroke-width="6" fill="transparent" stroke-linecap="round" stroke-dasharray="251.2" stroke-dashoffset="0"/>
+                        </svg>
+                        <!-- Water Ripple/Drops container & text inside -->
+                        <div class="absolute inset-1.5 bg-sky-50 dark:bg-slate-900 rounded-full overflow-hidden flex flex-col items-center justify-center border border-white/25 shadow-inner">
+                            <!-- Ripple waves inside clock -->
+                            <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-sky-400/20 rounded-b-full overflow-hidden">
+                                <svg class="absolute bottom-0 w-[200%] h-8 text-sky-400/30 wave-back-fill" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,60 C150,100 350,20 500,60 C650,100 850,20 1000,60 C1150,100 1300,20 1500,60 L1500,120 L0,120 Z"></path></svg>
+                            </div>
+                            <div class="z-10 text-center flex flex-col justify-center items-center select-none pointer-events-none">
+                                <span class="text-[8.5px] font-extrabold text-sky-500 uppercase tracking-widest block leading-none">Next Alert</span>
+                                <span id="countdown-time-display" class="text-xs font-black text-slate-800 dark:text-white mt-1 leading-none">28m 45s</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Preset Grid Items Selection -->
-                <div class="grid grid-cols-3 gap-3 mb-5">
-                    <button onclick="selectIntervalPreset(20, this)" class="py-4 border-2 border-slate-100 dark:border-slate-800 rounded-2xl flex flex-col items-center justify-center bg-white dark:bg-slate-950/60 hover:border-sky-300 select-btn-item">
-                        <span class="text-lg font-bold text-slate-800 dark:text-white">20</span>
-                        <span class="text-[9px] text-slate-400 uppercase font-semibold">Minutes</span>
-                    </button>
-                    <button onclick="selectIntervalPreset(30, this)" class="py-4 border-2 border-slate-100 dark:border-slate-800 rounded-2xl flex flex-col items-center justify-center bg-white dark:bg-slate-950/60 hover:border-sky-300 select-btn-item">
-                        <span class="text-lg font-bold text-slate-800 dark:text-white">30</span>
-                        <span class="text-[9px] text-slate-400 uppercase font-semibold">Minutes</span>
-                    </button>
-                    <button onclick="selectIntervalPreset(40, this)" class="py-4 border-2 border-sky-500 rounded-2xl flex flex-col items-center justify-center bg-white dark:bg-slate-950/60 select-btn-item active-preset">
-                        <span class="text-lg font-bold text-slate-800 dark:text-white">40</span>
-                        <span class="text-[9px] text-slate-400 uppercase font-semibold">Minutes</span>
-                    </button>
-                    <button onclick="selectIntervalPreset(60, this)" class="py-4 border-2 border-slate-100 dark:border-slate-800 rounded-2xl flex flex-col items-center justify-center bg-white dark:bg-slate-950/60 hover:border-sky-300 select-btn-item">
-                        <span class="text-lg font-bold text-slate-800 dark:text-white">60</span>
-                        <span class="text-[9px] text-slate-400 uppercase font-semibold">Minutes</span>
-                    </button>
-                    <button onclick="selectIntervalPreset(90, this)" class="py-4 border-2 border-slate-100 dark:border-slate-800 rounded-2xl flex flex-col items-center justify-center bg-white dark:bg-slate-950/60 hover:border-sky-300 select-btn-item">
-                        <span class="text-lg font-bold text-slate-800 dark:text-white">90</span>
-                        <span class="text-[9px] text-slate-400 uppercase font-semibold">Minutes</span>
-                    </button>
-                    <button onclick="selectIntervalPreset(120, this)" class="py-4 border-2 border-slate-100 dark:border-slate-800 rounded-2xl flex flex-col items-center justify-center bg-white dark:bg-slate-950/60 hover:border-sky-300 select-btn-item">
-                        <span class="text-lg font-bold text-slate-800 dark:text-white">120</span>
-                        <span class="text-[9px] text-slate-400 uppercase font-semibold">Minutes</span>
-                    </button>
+                <div class="grid grid-cols-3 gap-3 mb-5" id="presets-grid-container">
+                    <!-- Preset buttons dynamically loaded here by JS -->
                 </div>
 
                 <!-- Custom Interval Input Wrapper -->
@@ -731,6 +749,30 @@
         </div>
     </div>
 
+    <!-- Modal: Profile Avatar Selector Modern Screen Popup -->
+    <div id="modal-select-avatar" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 max-w-md w-full shadow-2xl border border-sky-100 dark:border-sky-950 flex flex-col max-h-[85vh]">
+            <div class="flex justify-between items-center w-full mb-3 shrink-0">
+                <div>
+                    <h3 class="text-lg font-extrabold text-slate-900 dark:text-white">Select Avatar</h3>
+                    <p class="text-[10px] text-slate-400">Choose an identity to update instantly.</p>
+                </div>
+                <button onclick="closeAvatarModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 font-bold text-xl px-2">&times;</button>
+            </div>
+            
+            <!-- Scrollable avatar picker grid list -->
+            <div class="flex-1 overflow-y-auto pr-1 no-scrollbar grid grid-cols-5 gap-3 py-2" id="avatar-choices-grid">
+                <!-- Javascript populates standard designer SVG presets dynamically here -->
+            </div>
+            
+            <div class="mt-4 shrink-0">
+                <button onclick="closeAvatarModal()" class="w-full py-3.5 bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-2xl shadow-lg shadow-sky-500/20 active:scale-95 transition-all text-xs">
+                    Done
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Simple Landing Footer Features Info -->
     <footer class="max-w-6xl mx-auto px-4 py-8 border-t border-slate-200/50 dark:border-slate-900/50 grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-slate-400 text-xs">
         <div class="flex flex-col items-center gap-1.5">
@@ -767,6 +809,10 @@
             notificationSetting: true,
             soundSetting: true,
             darkModeSetting: false,
+            selectedSound: "Water Drop",
+            selectedAvatarId: "s1",
+            presetIntervals: [20, 30, 40, 60, 90, 120],
+            countdownRemaining: 40 * 60,
             logsHistory: {
                 "19": 3,
                 "20": 4,
@@ -790,13 +836,63 @@
             { id: 8, label: "10:30 PM", logged: false },
         ];
 
+        const builtinAvatars = [
+            // Male
+            { id: "m1", char: "🧔", bg: "from-blue-400 to-sky-500", label: "Bearded Guy" },
+            { id: "m2", char: "👨‍💼", bg: "from-indigo-400 to-blue-600", label: "Male Professional" },
+            { id: "m3", char: "👨‍💻", bg: "from-slate-600 to-slate-800", label: "Male Developer" },
+            { id: "m4", char: "👨‍🚀", bg: "from-purple-500 to-indigo-700", label: "Male Astronaut" },
+            { id: "m5", char: "👱", bg: "from-yellow-300 to-orange-400", label: "Blonde Boy" },
+            { id: "m6", char: "👨‍⚕️", bg: "from-teal-400 to-emerald-600", label: "Male Doctor" },
+            // Female
+            { id: "f1", char: "👩", bg: "from-pink-400 to-rose-500", label: "Classic Woman" },
+            { id: "f2", char: "👩‍💼", bg: "from-purple-400 to-indigo-600", label: "Female Professional" },
+            { id: "f3", char: "👩‍💻", bg: "from-slate-700 to-slate-900", label: "Female Developer" },
+            { id: "f4", char: "👩‍🚀", bg: "from-indigo-500 to-pink-600", label: "Female Astronaut" },
+            { id: "f5", char: "👧", bg: "from-amber-300 to-yellow-500", label: "Young Girl" },
+            { id: "f6", char: "👩‍⚕️", bg: "from-cyan-400 to-blue-500", label: "Female Doctor" },
+            // Cartoon / Characters
+            { id: "c1", char: "🐱", bg: "from-amber-400 to-orange-500", label: "Cat Kid" },
+            { id: "c2", char: "🦊", bg: "from-orange-400 to-red-500", label: "Fox Mascot" },
+            { id: "c3", char: "🐼", bg: "from-slate-300 to-slate-500", label: "Panda Mascot" },
+            { id: "c4", char: "👾", bg: "from-purple-600 to-fuchsia-700", label: "Space Invader" },
+            { id: "c5", char: "🤖", bg: "from-slate-400 to-slate-600", label: "Cyber Robot" },
+            { id: "c6", char: "🦄", bg: "from-fuchsia-300 to-pink-500", label: "Cute Unicorn" },
+            // Professional Icons
+            { id: "p1", char: "🩺", bg: "from-teal-300 to-teal-500", label: "Stethoscope" },
+            { id: "p2", char: "🎓", bg: "from-blue-700 to-indigo-900", label: "Graduate Cap" },
+            { id: "p3", char: "💻", bg: "from-slate-500 to-slate-700", label: "Sleek Laptop" },
+            { id: "p4", char: "💼", bg: "from-amber-600 to-amber-800", label: "Suitcase" },
+            { id: "p5", char: "🔬", bg: "from-emerald-500 to-teal-700", label: "Microscope" },
+            { id: "p6", char: "🎨", bg: "from-pink-500 to-violet-600", label: "Artist Palette" },
+            // Minimalist / Symbols
+            { id: "s1", char: "💧", bg: "from-sky-300 to-blue-500", label: "Hydration Drop" },
+            { id: "s2", char: "⚡", bg: "from-yellow-400 to-amber-500", label: "Active Energy" },
+            { id: "s3", char: "🍀", bg: "from-emerald-400 to-green-600", label: "Good Luck Clover" },
+            { id: "s4", char: "✨", bg: "from-violet-400 to-fuchsia-500", label: "Magic Sparkles" },
+            { id: "s5", char: "🌸", bg: "from-rose-300 to-pink-400", label: "Spring Flower" },
+            { id: "s6", char: "🌟", bg: "from-amber-300 to-yellow-600", label: "Glowing Star" }
+        ];
+
+        const soundOptions = [
+            "Water Drop",
+            "Gentle Bell",
+            "Soft Chime",
+            "Nature Water",
+            "Digital Alarm",
+            "Crystal Bell"
+        ];
+
         let alarmIntervalId = null;
+        let countdownTimerId = null;
+        let chosenPresetIntervalValue = 40;
 
         // Onboard check on launch
         window.addEventListener('load', () => {
             initializeStateFromStorage();
             initializeUI();
             startRepeatingAlarms();
+            initCountdownTimer();
             requestSystemNotificationPermission();
             simulatePWA();
             
@@ -810,7 +906,7 @@
          */
         function initializeStateFromStorage() {
             try {
-                const savedState = localStorage.getItem('aquaflow_state_v4');
+                const savedState = localStorage.getItem('aquaflow_state_v5');
                 if (savedState) {
                     state = { ...state, ...JSON.parse(savedState) };
                     
@@ -828,7 +924,7 @@
 
         function saveCurrentState() {
             try {
-                localStorage.setItem('aquaflow_state_v4', JSON.stringify(state));
+                localStorage.setItem('aquaflow_state_v5', JSON.stringify(state));
             } catch (err) {
                 console.warn("Storage update error", err);
             }
@@ -917,52 +1013,158 @@
             updateWaterGraphics();
             updateStatsScreenUI();
             updateHistoryUI();
+            renderSoundSettings();
+            renderIntervalPresets();
+            updateAvatarDisplays();
         }
 
         /*
-         * STREAMING_CHUNK: Synthesizing responsive water drop audio frequencies...
+         * STREAMING_CHUNK: Synthesizing real-time notification sounds...
          */
-        function playSynthesizedWaterSound() {
-            if (!state.soundSetting) return;
-
+        function playSoundSynthesizer(soundName) {
             try {
                 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 
-                // Sound Element 1: Dynamic rising sine wave (Plop sound effect)
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-
-                osc.type = 'sine';
-                // Fast sweep sweep imitating a bubble rising and bursting
-                osc.frequency.setValueAtTime(350, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(1100, audioCtx.currentTime + 0.15);
-
-                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.18);
-
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.2);
-
-                // Sound Element 2: Small auxiliary resonance sound
-                setTimeout(() => {
+                if (soundName === "Water Drop") {
+                    // Splash bubble pop
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(400, audioCtx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.15);
+                    gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.18);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.2);
+                } 
+                else if (soundName === "Gentle Bell") {
+                    // Soft resonance bell
+                    const osc1 = audioCtx.createOscillator();
                     const osc2 = audioCtx.createOscillator();
-                    const gain2 = audioCtx.createGain();
-                    osc2.type = 'sine';
-                    osc2.frequency.setValueAtTime(700, audioCtx.currentTime);
-                    osc2.frequency.exponentialRampToValueAtTime(1500, audioCtx.currentTime + 0.08);
-                    gain2.gain.setValueAtTime(0.08, audioCtx.currentTime);
-                    gain2.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.09);
-                    osc2.connect(gain2);
-                    gain2.connect(audioCtx.destination);
+                    const gain = audioCtx.createGain();
+                    
+                    osc1.type = 'sine';
+                    osc1.frequency.setValueAtTime(440, audioCtx.currentTime); // A4
+                    osc2.type = 'triangle';
+                    osc2.frequency.setValueAtTime(880, audioCtx.currentTime); // Harmonious overtone
+                    
+                    gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.2);
+                    
+                    osc1.connect(gain);
+                    osc2.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    
+                    osc1.start();
                     osc2.start();
-                    osc2.stop(audioCtx.currentTime + 0.1);
-                }, 40);
-
+                    osc1.stop(audioCtx.currentTime + 1.2);
+                    osc2.stop(audioCtx.currentTime + 1.2);
+                }
+                else if (soundName === "Soft Chime") {
+                    // Harmonious chime chord
+                    const freqs = [523.25, 659.25, 783.99]; // C5, E5, G5 major triad
+                    freqs.forEach((freq, idx) => {
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(freq, audioCtx.currentTime + idx * 0.05);
+                        gain.gain.setValueAtTime(0.15, audioCtx.currentTime + idx * 0.05);
+                        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + idx * 0.05 + 0.8);
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.start(audioCtx.currentTime + idx * 0.05);
+                        osc.stop(audioCtx.currentTime + idx * 0.05 + 0.8);
+                    });
+                }
+                else if (soundName === "Nature Water") {
+                    // Successive bubbles mimicking flowing stream
+                    for (let i = 0; i < 4; i++) {
+                        const delay = i * 0.12;
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(300 + Math.random() * 200, audioCtx.currentTime + delay);
+                        osc.frequency.exponentialRampToValueAtTime(900 + Math.random() * 300, audioCtx.currentTime + delay + 0.1);
+                        gain.gain.setValueAtTime(0.1, audioCtx.currentTime + delay);
+                        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + delay + 0.12);
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.start(audioCtx.currentTime + delay);
+                        osc.stop(audioCtx.currentTime + delay + 0.15);
+                    }
+                }
+                else if (soundName === "Digital Alarm") {
+                    // Electronic alarm sound sequence
+                    const bleeps = 3;
+                    for (let i = 0; i < bleeps; i++) {
+                        const delay = i * 0.18;
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+                        osc.type = 'square';
+                        osc.frequency.setValueAtTime(950, audioCtx.currentTime + delay);
+                        gain.gain.setValueAtTime(0.1, audioCtx.currentTime + delay);
+                        gain.gain.setValueAtTime(0.1, audioCtx.currentTime + delay + 0.08);
+                        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + delay + 0.1);
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.start(audioCtx.currentTime + delay);
+                        osc.stop(audioCtx.currentTime + delay + 0.12);
+                    }
+                }
+                else if (soundName === "Crystal Bell") {
+                    // Extremely high frequency shimmering ring
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(1200, audioCtx.currentTime);
+                    osc.frequency.setValueAtTime(1250, audioCtx.currentTime + 0.05); // slight detune shimmering
+                    gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.5);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 1.6);
+                }
             } catch (e) {
                 console.warn("Audio Context init block", e);
             }
+        }
+
+        function playSelectedNotificationSound() {
+            if (!state.soundSetting) return;
+            playSoundSynthesizer(state.selectedSound || "Water Drop");
+        }
+
+        function playSoundPreview(soundName) {
+            playSoundSynthesizer(soundName);
+        }
+
+        function selectNotificationSound(soundName) {
+            state.selectedSound = soundName;
+            saveCurrentState();
+            renderSoundSettings();
+            playSoundSynthesizer(soundName); // play confirmation beep
+        }
+
+        function renderSoundSettings() {
+            const container = document.getElementById('settings-sound-list');
+            if (!container) return;
+            container.innerHTML = "";
+            soundOptions.forEach(sound => {
+                const isSelected = state.selectedSound === sound;
+                const row = document.createElement('div');
+                row.className = `flex justify-between items-center p-2.5 rounded-xl border transition ${isSelected ? 'bg-sky-500/10 border-sky-500/50 dark:bg-sky-500/5' : 'bg-white dark:bg-slate-950 border-slate-100 dark:border-slate-800'}`;
+                row.innerHTML = `
+                    <span class="text-xs font-bold ${isSelected ? 'text-sky-500' : 'text-slate-700 dark:text-slate-300'}">${sound}</span>
+                    <div class="flex items-center gap-1.5">
+                        <button onclick="playSoundPreview('${sound}')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-850 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 text-[10px] font-bold rounded-lg transition">▶ Preview</button>
+                        <button onclick="selectNotificationSound('${sound}')" class="px-2.5 py-1 ${isSelected ? 'bg-sky-500 text-white' : 'bg-slate-100 hover:bg-slate-200 dark:bg-slate-850 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300'} text-[10px] font-bold rounded-lg transition">${isSelected ? 'Active' : 'Select'}</button>
+                    </div>
+                `;
+                container.appendChild(row);
+            });
         }
 
         /*
@@ -994,6 +1196,89 @@
                 setTimeout(() => {
                     particle.remove();
                 }, 2000);
+            }
+        }
+
+        /*
+         * STREAMING_CHUNK: Managing premium animated circular countdown displays...
+         */
+        function initCountdownTimer() {
+            if (countdownTimerId) clearInterval(countdownTimerId);
+            
+            let totalSeconds = state.reminderMinutes * 60;
+            if (state.countdownRemaining === undefined || state.countdownRemaining <= 0 || state.countdownRemaining > totalSeconds) {
+                state.countdownRemaining = totalSeconds;
+            }
+            
+            countdownTimerId = setInterval(() => {
+                if (!state.alarmActive) return; // Freeze timer if reminders are suspended
+                
+                state.countdownRemaining--;
+                if (state.countdownRemaining <= 0) {
+                    state.countdownRemaining = state.reminderMinutes * 60; // Auto reset countdown
+                    playSelectedNotificationSound();
+                    dispatchWaterAlert();
+                    playClockSplashAnimation();
+                }
+                saveCurrentState();
+                updateCountdownUI();
+            }, 1000);
+            updateCountdownUI();
+        }
+
+        function updateCountdownUI() {
+            const circle = document.getElementById('countdown-progress');
+            const display = document.getElementById('countdown-time-display');
+            if (!circle || !display) return;
+            
+            const total = state.reminderMinutes * 60;
+            const current = state.countdownRemaining;
+            
+            // Circumference of radius 40 circle is 251.2
+            const circumference = 251.2;
+            const percentage = Math.max(0, Math.min(1, current / total));
+            const strokeDashoffset = circumference - (circumference * percentage);
+            
+            circle.setAttribute('stroke-dashoffset', strokeDashoffset);
+            
+            // Format to "XXm YYs"
+            const m = Math.floor(current / 60);
+            const s = current % 60;
+            display.innerText = `${m}m ${s}s`;
+        }
+
+        function playClockSplashAnimation() {
+            const circle = document.getElementById('countdown-progress');
+            if (!circle) return;
+            const widget = circle.closest('.relative');
+            widget.classList.add('scale-110', 'rotate-12');
+            setTimeout(() => {
+                widget.classList.remove('scale-110', 'rotate-12');
+            }, 500);
+
+            // Create circular floating drops around clock boundaries
+            for (let i = 0; i < 10; i++) {
+                const drop = document.createElement('div');
+                drop.className = "absolute w-2 h-2 rounded-full pointer-events-none";
+                drop.style.background = "radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(56,189,248,1) 80%)";
+                
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 35 + Math.random() * 30;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+                
+                drop.style.left = "50%";
+                drop.style.top = "50%";
+                drop.style.transform = "translate(-50%, -50%) scale(0.5)";
+                drop.style.transition = "all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)";
+                
+                widget.appendChild(drop);
+                drop.offsetWidth; // Force layout redraw
+                
+                drop.style.transform = `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(1.1)`;
+                drop.style.opacity = "0";
+                
+                setTimeout(() => { drop.remove(); }, 800);
             }
         }
 
@@ -1088,7 +1373,7 @@
             state.logsHistory["23"] = state.todayCount;
 
             // Trigger sound + particles
-            playSynthesizedWaterSound();
+            playSelectedNotificationSound();
             createWaterSplashDropParticles();
             saveCurrentState();
             updateWaterGraphics();
@@ -1142,6 +1427,52 @@
             // Calculate wave overlay bottom placement (from -10% fully empty to 100% fully complete)
             const calculatedBottomPosition = Math.min(100, Math.max(-10, percentage - 15));
             document.getElementById('liquid-wave-element').style.bottom = `${calculatedBottomPosition}%`;
+        }
+
+        /*
+         * STREAMING_CHUNK: Managing dynamic personalized user avatars...
+         */
+        function openAvatarModal() {
+            renderAvatarChoices();
+            document.getElementById('modal-select-avatar').classList.remove('hidden');
+        }
+
+        function closeAvatarModal() {
+            document.getElementById('modal-select-avatar').classList.add('hidden');
+        }
+
+        function selectAvatar(avatarId) {
+            state.selectedAvatarId = avatarId;
+            saveCurrentState();
+            updateAvatarDisplays();
+            renderAvatarChoices();
+        }
+
+        function updateAvatarDisplays() {
+            const avatar = builtinAvatars.find(a => a.id === state.selectedAvatarId) || builtinAvatars[24]; // default to drop symbol
+            const homeSlot = document.getElementById('home-avatar-slot');
+            if (homeSlot) {
+                homeSlot.parentElement.className = `w-12 h-12 shrink-0 rounded-full border-2 border-sky-400/80 hover:border-sky-500 bg-gradient-to-br ${avatar.bg} shadow-md transition-all active:scale-95 flex items-center justify-center text-2.5xl overflow-hidden focus:outline-none`;
+                homeSlot.innerText = avatar.char;
+            }
+        }
+
+        function renderAvatarChoices() {
+            const grid = document.getElementById('avatar-choices-grid');
+            if (!grid) return;
+            grid.innerHTML = "";
+            builtinAvatars.forEach(avatar => {
+                const isSelected = state.selectedAvatarId === avatar.id;
+                const btn = document.createElement('button');
+                btn.className = `w-14 h-14 rounded-2xl bg-gradient-to-br ${avatar.bg} hover:scale-105 transition-all flex items-center justify-center text-3xl shrink-0 focus:outline-none relative ${isSelected ? 'ring-4 ring-sky-500 ring-offset-2 dark:ring-offset-slate-900 scale-105' : 'opacity-85 hover:opacity-100'}`;
+                btn.setAttribute('onclick', `selectAvatar('${avatar.id}')`);
+                btn.setAttribute('title', avatar.label);
+                btn.innerHTML = `
+                    <span>${avatar.char}</span>
+                    ${isSelected ? '<span class="absolute -top-1 -right-1 bg-sky-500 text-white text-[8px] w-4 h-4 rounded-full flex items-center justify-center font-bold shadow">✓</span>' : ''}
+                `;
+                grid.appendChild(btn);
+            });
         }
 
         /*
@@ -1235,11 +1566,13 @@
             const percentage = Math.min(100, Math.round((today / goal) * 100));
 
             // Radial circular stats sync
-            document.getElementById('stats-circle-val').innerText = `${percentage}%`;
+            const statsVal = document.getElementById('stats-circle-val');
+            if (statsVal) statsVal.innerText = `${percentage}%`;
             
             // stroke-dasharray is 289
             const calculatedDashoffset = 289 - (289 * (percentage / 100));
-            document.getElementById('stats-circle-progress').setAttribute('stroke-dashoffset', calculatedDashoffset);
+            const progressCircle = document.getElementById('stats-circle-progress');
+            if (progressCircle) progressCircle.setAttribute('stroke-dashoffset', calculatedDashoffset);
 
             // Set stats details
             document.getElementById('stats-glasses-today').innerText = today;
@@ -1290,14 +1623,27 @@
         }
 
         /*
-         * STREAMING_CHUNK: Configuring repeating alarm interval push alerts...
+         * STREAMING_CHUNK: Configuring dynamic interval presets...
          */
-        let chosenPresetIntervalValue = 40;
+        function renderIntervalPresets() {
+            const container = document.getElementById('presets-grid-container');
+            if (!container) return;
+            container.innerHTML = "";
+            state.presetIntervals.forEach(min => {
+                const isSelected = state.reminderMinutes === min;
+                const button = document.createElement('button');
+                button.className = `py-4 border-2 ${isSelected ? 'border-sky-500 active-preset' : 'border-slate-100 dark:border-slate-800 hover:border-sky-300'} rounded-2xl flex flex-col items-center justify-center bg-white dark:bg-slate-950/60 select-btn-item transition-all`;
+                button.setAttribute('onclick', `selectIntervalPreset(${min}, this)`);
+                button.innerHTML = `
+                    <span class="text-lg font-bold text-slate-800 dark:text-white">${min}</span>
+                    <span class="text-[9px] text-slate-400 uppercase font-semibold">Minutes</span>
+                `;
+                container.appendChild(button);
+            });
+        }
 
         function openIntervalModal() {
             document.getElementById('interval-panel-card').scrollIntoView({ behavior: 'smooth' });
-            
-            // Highlight interval card visually to indicate user should scroll or look
             const panel = document.getElementById('interval-panel-card');
             panel.classList.add('border-sky-500');
             setTimeout(() => {
@@ -1318,16 +1664,31 @@
         }
 
         function saveIntervalSetting() {
-            const customVal = document.getElementById('input-custom-interval').value;
-            if (customVal && customVal > 0) {
-                state.reminderMinutes = parseInt(customVal);
+            const customValStr = document.getElementById('input-custom-interval').value;
+            let finalMinutes = state.reminderMinutes;
+            
+            if (customValStr) {
+                const customVal = parseInt(customValStr);
+                if (customVal && customVal > 0) {
+                    finalMinutes = customVal;
+                    if (!state.presetIntervals.includes(customVal)) {
+                        state.presetIntervals.push(customVal);
+                    }
+                }
             } else {
-                state.reminderMinutes = chosenPresetIntervalValue;
+                finalMinutes = chosenPresetIntervalValue;
             }
 
+            state.reminderMinutes = finalMinutes;
+            state.countdownRemaining = finalMinutes * 60; // reset countdown to new minutes value
+            
             document.getElementById('setting-val-interval').innerText = `${state.reminderMinutes} Minutes`;
             saveCurrentState();
             startRepeatingAlarms();
+            initCountdownTimer();
+            renderIntervalPresets();
+
+            document.getElementById('input-custom-interval').value = "";
 
             triggerLocalAlertPopup("Interval Saved ⏰", `AquaFlow reminder timer set to trigger every ${state.reminderMinutes} minutes.`);
         }
@@ -1402,7 +1763,7 @@
         }
 
         function dispatchWaterAlert() {
-            playSynthesizedWaterSound();
+            playSelectedNotificationSound();
 
             if (state.notificationSetting && 'Notification' in window && Notification.permission === 'granted') {
                 const systemAlert = new Notification("💧 Time to Drink Water!", {
